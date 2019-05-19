@@ -1,5 +1,4 @@
-/*package com.upgrad.quora.api.controller;
-
+package com.upgrad.quora.api.controller;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,12 +15,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-
 public class AdminControllerTest {
 
     @Autowired
     private MockMvc mvc;
-
 
     //This test case passes when you try to delete the user but the JWT token entered does not exist in the database.
     @Test
@@ -50,4 +47,3 @@ public class AdminControllerTest {
 
 
 }
-*/

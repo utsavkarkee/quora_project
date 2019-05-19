@@ -1,5 +1,4 @@
-/*package com.upgrad.quora.api.controller;
-
+package com.upgrad.quora.api.controller;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +21,6 @@ public class QuestionControllerTest {
 
     @Autowired
     private MockMvc mvc;
-
 
     //This test case passes when you try to create the question but the JWT token entered does not exist in the database.
     @Test
@@ -151,7 +149,4 @@ public class QuestionControllerTest {
                 .andExpect(status().isNotFound())
                 .andExpect(MockMvcResultMatchers.jsonPath("code").value("USR-001"));
     }
-
-
 }
-*/
