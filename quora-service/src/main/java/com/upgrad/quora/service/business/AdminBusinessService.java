@@ -17,17 +17,17 @@ public class AdminBusinessService {
     private AdminDao adminDao;
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public UserEntity userDelete(final String userId, final String authorization) throws AuthorizationFailedException, UserNotFoundException {
+    public UserEntity deleteUser(final String userId, final String authorization) throws AuthorizationFailedException, UserNotFoundException {
         UserAuthTokenEntity userAuthTokenEntity = adminDao.getUserAuthToken(authorization);
         if (userAuthTokenEntity == null) {
             throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
         }
 
-        if(userAuthTokenEntity.getLogoutAt() != null){
+        if (userAuthTokenEntity.getLogoutAt() != null) {
             throw new AuthorizationFailedException("ATHR-002", "User is signed out");
         }
 
-        if(!(userAuthTokenEntity.getUser().getRole().equals("admin"))){
+        if (!(userAuthTokenEntity.getUser().getRole().equals("admin"))) {
             throw new AuthorizationFailedException("ATHR-003", "Unauthorized Access, Entered user is not an admin");
         }
 
@@ -36,7 +36,6 @@ public class AdminBusinessService {
             throw new UserNotFoundException("USR-001", "User with entered uuid to be deleted does not exist");
         }
 
-        return adminDao.userDelete(userEntity);
+        return adminDao.deleteUser(userEntity);
     }
-
 }
