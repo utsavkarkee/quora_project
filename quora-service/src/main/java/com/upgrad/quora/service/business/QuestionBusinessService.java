@@ -42,7 +42,7 @@ public class QuestionBusinessService {
         return questionDao.createQuestion(questionEntity);
     }
 
-   public List<QuestionEntity> getAllQuestions(String authorization) throws AuthorizationFailedException{
+   public List<QuestionEntity> getAllQuestions(String authorization) throws AuthorizationFailedException {
 
        UserAuthTokenEntity userAuthTokenEntity = userDao.getUserAuthToken(authorization);
        if (userAuthTokenEntity == null) {
@@ -97,7 +97,8 @@ public class QuestionBusinessService {
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public QuestionEntity editQuestionContent(String questionId, String authorization, QuestionEntity questionEntity) throws AuthorizationFailedException, InvalidQuestionException {
+    public QuestionEntity editQuestionContent(String questionId, String authorization, QuestionEntity questionEntity)
+            throws AuthorizationFailedException, InvalidQuestionException {
 
         QuestionEntity questionEntity1 = questionDao.getQuestionByUuid(questionId);
         UserAuthTokenEntity userAuthTokenEntity = userDao.getUserAuthToken(authorization);
