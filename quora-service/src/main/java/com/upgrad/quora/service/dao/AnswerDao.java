@@ -21,7 +21,7 @@ public class AnswerDao {
         return answerEntity;
     }
 
-    public AnswerEntity editAnswer(AnswerEntity answerEntity) {
+    public AnswerEntity editAnswerContent(AnswerEntity answerEntity) {
         entityManager.merge(answerEntity);
         return answerEntity;
     }
@@ -47,7 +47,7 @@ public class AnswerDao {
         }
     }
 
-    public List<AnswerEntity> getAllAnswers(final QuestionEntity questionEntity) {
+    public List<AnswerEntity> getAllAnswersToQuestion(final QuestionEntity questionEntity) {
         try {
             return entityManager.createNamedQuery("answerByQuestionId", AnswerEntity.class).setParameter("question", questionEntity).getResultList();
         } catch (NoResultException nre) {

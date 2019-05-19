@@ -15,12 +15,12 @@ public class QuestionDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public QuestionEntity createQuestion(QuestionEntity questionEntity){
+    public QuestionEntity createQuestion(QuestionEntity questionEntity) {
         entityManager.persist(questionEntity);
         return questionEntity;
     }
 
-    public List<QuestionEntity> getAllQuestion() {
+    public List<QuestionEntity> getAllQuestions() {
         try {
             return entityManager.createNamedQuery("allQuestions", QuestionEntity.class).getResultList();
         } catch (NoResultException nre) {
@@ -28,20 +28,17 @@ public class QuestionDao {
         }
     }
 
+    public QuestionEntity editQuestionContent(QuestionEntity questionEntity) {
+        entityManager.merge(questionEntity);
+        return questionEntity;
+    }
+
     public QuestionEntity deleteQuestion(QuestionEntity questionEntity) {
         entityManager.remove(questionEntity);
         return questionEntity;
     }
 
-    public QuestionEntity getQuestionByUuid(String questionId){
-        try {
-            return entityManager.createNamedQuery("questionByUuid", QuestionEntity.class).setParameter("questionId", questionId).getSingleResult();
-        } catch (NoResultException nre) {
-            return null;
-        }
-    }
-
-    public List<QuestionEntity> getAllQuestionsByUser(UserEntity user){
+    public List<QuestionEntity> getAllQuestionsByUser(UserEntity user) {
         try {
             return entityManager.createNamedQuery("questionsByUser", QuestionEntity.class).setParameter("users", user).getResultList();
         } catch (NoResultException nre){
@@ -49,11 +46,11 @@ public class QuestionDao {
         }
     }
 
-    public QuestionEntity editQuestion (QuestionEntity questionEntity){
-        entityManager.merge(questionEntity);
-        return questionEntity;
+    public QuestionEntity getQuestionByUuid(String questionId) {
+        try {
+            return entityManager.createNamedQuery("questionByUuid", QuestionEntity.class).setParameter("questionId", questionId).getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
     }
-
-
-
 }

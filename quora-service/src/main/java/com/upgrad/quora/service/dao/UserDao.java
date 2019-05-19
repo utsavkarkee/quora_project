@@ -14,60 +14,57 @@ public class UserDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public UserEntity createUser(UserEntity userEntity){
-
+    public UserEntity createUser(UserEntity userEntity) {
         entityManager.persist(userEntity);
         return userEntity;
-
     }
 
-    public UserEntity getUser(final String userUuid){
+    public UserEntity getUser(final String userUuid) {
         try {
             return entityManager.createNamedQuery("userByUuid", UserEntity.class).setParameter("uuid", userUuid).getSingleResult();
         }
-        catch(NoResultException nre){
+        catch(NoResultException nre) {
             return null;
         }
     }
 
-    public UserEntity getUserByUsername(final String username){
+    public UserEntity getUserByUsername(final String username) {
         try {
             return entityManager.createNamedQuery("userByUsername", UserEntity.class).setParameter("username", username).getSingleResult();
         }
-        catch(NoResultException nre){
+        catch(NoResultException nre) {
             return null;
         }
     }
 
-    public UserEntity getUserByEmail(final String email){
+    public UserEntity getUserByEmail(final String email) {
         try {
             return entityManager.createNamedQuery("userByEmail", UserEntity.class).setParameter("email", email).getSingleResult();
         }
-        catch(NoResultException nre){
+        catch(NoResultException nre) {
             return null;
         }
     }
 
-    public UserAuthTokenEntity createAuthToken(final UserAuthTokenEntity userAuthTokenEntity){
+    public UserAuthTokenEntity createAuthToken(final UserAuthTokenEntity userAuthTokenEntity) {
         entityManager.persist(userAuthTokenEntity);
         return userAuthTokenEntity;
     }
 
-    public UserAuthTokenEntity updateAuthToken(final UserAuthTokenEntity userAuthTokenEntity){
+    public UserAuthTokenEntity updateAuthToken(final UserAuthTokenEntity userAuthTokenEntity) {
         entityManager.merge(userAuthTokenEntity);
         return userAuthTokenEntity;
     }
 
-    public void updateUser(final UserEntity updatedUserEntity){
+    public void updateUser(final UserEntity updatedUserEntity) {
         entityManager.merge(updatedUserEntity);
     }
     public UserAuthTokenEntity getUserAuthToken(final String accessToken) {
         try {
             return entityManager.createNamedQuery("userAuthTokenByAccessToken", UserAuthTokenEntity.class)
                     .setParameter("accessToken", accessToken).getSingleResult();
-        } catch (NoResultException nre) {
+        } catch(NoResultException nre) {
             return null;
         }
     }
-
 }

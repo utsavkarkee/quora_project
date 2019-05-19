@@ -14,28 +14,25 @@ public class AdminDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public UserEntity userDelete(UserEntity userEntity){
-
+    public UserEntity deleteUser(UserEntity userEntity) {
         entityManager.remove(userEntity);
         return userEntity;
-
     }
 
-    public UserEntity getUser(final String userUuid){
+    public UserEntity getUser(final String userUuid) {
         try {
             return entityManager.createNamedQuery("userByUuid", UserEntity.class).setParameter("uuid", userUuid).getSingleResult();
         }
-        catch(NoResultException nre){
+        catch (NoResultException nre) {
             return null;
         }
     }
 
-    public UserAuthTokenEntity getUserAuthToken(final String accesstoken) {
+    public UserAuthTokenEntity getUserAuthToken(final String accessToken) {
         try {
-            return entityManager.createNamedQuery("userAuthTokenByAccessToken", UserAuthTokenEntity.class).setParameter("accessToken", accesstoken).getSingleResult();
+            return entityManager.createNamedQuery("userAuthTokenByAccessToken", UserAuthTokenEntity.class).setParameter("accessToken", accessToken).getSingleResult();
         } catch (NoResultException nre) {
             return null;
         }
     }
-
 }
